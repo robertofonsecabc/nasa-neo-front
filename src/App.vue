@@ -71,6 +71,9 @@ export default {
     }
   },
   methods : {
+    /**
+     * Não precisamos mais usar aqui porque verificamos antes do dashboard
+     */
     checkAuthentication(){
       if( !LoginService.checkAuthentication() ){
         this.$router.push("/login")
@@ -78,7 +81,7 @@ export default {
     }
   },
   mounted() {
-    this.checkAuthentication()
+    // this.checkAuthentication()
   }
 }
 </script>

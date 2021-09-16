@@ -20,14 +20,14 @@ const routes = [
     name: 'Dashboard',
     component: Dashboard,
     beforeEnter: (to, from, next) => {
-      console.log(to, from, next)
       if( LoginService.isAuthenticated() ){
         console.log("Is authenticated go on")
         next()
         return
       }
-      console.log("not authenticated, login!")
-      router.push("/login")
+      if( from.name != "Login"){
+        router.push("/login")
+      }
     }
   },
   {
@@ -38,11 +38,13 @@ const routes = [
   {
     path: '/logout',
     name: 'Logout',
-    beforeEnter: () => {
+    beforeEnter: (to,from) => {
       if( LoginService.isAuthenticated() ){
         LoginService.logout()
       }
-      router.push("/login")
+      if( from.name != "Login"){
+        router.push("/login")
+      }
     }
   },
 
