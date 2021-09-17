@@ -27,16 +27,19 @@ class LoginService {
     checkAuthentication() {
         if( !this.isAuthenticated() ){
             // Verificar o localStorage
+            console.log("Vuex not set")
             const storage = JSON.parse( localStorage.getItem(credentialKey) )
             if( storage != null ){
+                console.log("Vuex setted")
                 store.commit('login', storage)
                 return true
             }
         }
-        return false;
+        return this.isAuthenticated();
     }
 
     isAuthenticated(){
+        console.log("isAuthenticated", store.getters.isAuthenticated)
         return store.getters.isAuthenticated
     }
 }
