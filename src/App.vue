@@ -52,18 +52,8 @@ export default {
       return this.$store.getters.username
     }
   },
-  methods : {
-    /**
-     * Não precisamos mais usar aqui porque verificamos antes do dashboard
-     */
-    checkAuthentication(){
-      if( !LoginService.checkAuthentication() ){
-        this.$router.push("/login")
-      }
-    }
-  },
   mounted() {
-    // this.checkAuthentication()
+    LoginService.checkAuthentication()
   }
 }
 </script>

@@ -20,7 +20,7 @@ const routes = [
     name: 'Dashboard',
     component: Dashboard,
     beforeEnter: (to, from, next) => {
-      if( LoginService.isAuthenticated() ){
+      if( LoginService.checkAuthentication() ){
         console.log("Is authenticated go on")
         next()
         return
@@ -39,7 +39,7 @@ const routes = [
     path: '/logout',
     name: 'Logout',
     beforeEnter: (to,from) => {
-      if( LoginService.isAuthenticated() ){
+      if( LoginService.checkAuthentication() ){
         LoginService.logout()
       }
       if( from.name != "Login"){

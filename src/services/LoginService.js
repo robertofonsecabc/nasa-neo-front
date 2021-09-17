@@ -25,13 +25,10 @@ class LoginService {
     }
 
     checkAuthentication() {
-        if( !store.getters.isAuthenticated ){
+        if( !this.isAuthenticated() ){
             // Verificar o localStorage
-            console.log('LoginSerive.checkAuthentication - not authenticated')
             const storage = JSON.parse( localStorage.getItem(credentialKey) )
-            console.log('Storage', storage)
             if( storage != null ){
-                console.log('Login', storage)
                 store.commit('login', storage)
                 return true
             }
