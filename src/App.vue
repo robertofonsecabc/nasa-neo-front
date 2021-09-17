@@ -1,56 +1,38 @@
 <template>
-  <v-app>
-    <v-container fluid>
 
-      <!-- Barra superior -->
-      <v-toolbar v-if="isAuthenticated" flat>
-        <v-toolbar-title>
-          <v-btn icon elevation="0" small @click="toggle=!toggle">
-            <v-icon>mdi-menu-open</v-icon>
-          </v-btn>
-        </v-toolbar-title>
-        <v-spacer></v-spacer>
+  <v-app id="inspire">
+    <v-app-bar
+        app
+        color="white"
+        flat
+    >
+      <v-tabs
+          centered
+          class="ml-n9"
+          color="grey darken-1"
+      >
+        <v-tab to="/">
+          Home
+        </v-tab>
+        <v-tab to="/dashboard" v-if="isAuthenticated">
+          Dashboard
+        </v-tab>
+        <v-tab to="/login" v-else>
+          Login
+        </v-tab>
+        <v-tab to="/logout" v-if="isAuthenticated">
+          Sair
+        </v-tab>
+      </v-tabs>
+    </v-app-bar>
 
-        <v-menu class="toolbar-menu-item" offset-y origin="center center" :nudge-bottom="10" transition="scale-transition">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn elevation="0" small v-bind="attrs" v-on="on" >
-              <v-icon small>mdi-widgets</v-icon>
-            </v-btn>
-          </template>
-          <v-card class="mx-auto" max-width="400" tile>
-            <v-card-subtitle>Olá, {{ username }}</v-card-subtitle>
-            <v-list dense>
-              <v-list-item-group>
-                <v-list-item to="/logout">
-                  <v-list-item-icon>
-                    <v-icon>mdi-logout-variant</v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-content>
-                    <v-list-item-title>Sair</v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list-item-group>
-            </v-list>
-          </v-card>
-        </v-menu>
-      </v-toolbar>
-
-
-      <!-- Navegação -->
-      <!-- <Menu v-if="isAuthenticated"></Menu> -->
-
-      <div>
-        <router-link to="/login">Login</router-link>
-        <router-link to="/logout">Logout</router-link>
-        <router-link to="/dashboard">Dashboard</router-link>
-        <router-link to="/">Home</router-link>
-      </div>
-
-      <v-main>
+    <v-main class="grey lighten-3 mt-4">
+      <v-container>
         <router-view />
-      </v-main>
-    </v-container>
+      </v-container>
+    </v-main>
   </v-app>
+
 </template>
 
 <script>
@@ -60,14 +42,14 @@ import LoginService from "@/services/LoginService";
 export default {
   name: "App",
   data : ()=>({
-    toggle : false
+    toggle : false,
   }),
   computed : {
     isAuthenticated(){
-      return true //!this.$store.getters.isAuthenticated
+      return this.$store.getters.isAuthenticated
     },
     username(){
-      return "maria@maria.com" //this.$store.getters.username
+      return this.$store.getters.username
     }
   },
   methods : {

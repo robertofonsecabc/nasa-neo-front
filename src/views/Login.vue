@@ -1,8 +1,7 @@
 <template>
-
-    <v-layout align-center justify-center>
-      <v-flex xs12 sm8 md4 lg4>
-        <v-card class="elevation-1 pa-3">
+    <v-layout align-center justify-center class="mt-10 pt-10">
+      <v-flex xs12 sm8 md6 lg4>
+        <v-card class="elevation-0 pa-3">
           <v-card-text>
             <div class="layout column align-center mb-5">
               <h3 @click="toLogin('oi')" >Verificador de fim do mundo!</h3>
@@ -22,9 +21,6 @@
           </v-card-text>
         </v-card>
       </v-flex>
-
-
-
     </v-layout>
 
 </template>
