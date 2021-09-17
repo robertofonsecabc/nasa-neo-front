@@ -25,6 +25,13 @@ import LoginService from "@/services/LoginService";
 
 export default {
   name: "LoginForm",
+  props:{
+    username : {
+      type: String,
+      default: null,
+      required: false
+    }
+  },
   data: function (){
     return {
       credential : {
@@ -41,13 +48,17 @@ export default {
   },
   computed: {
   },
+  watch:{
+    username(username){
+      console.log(username)
+      this.credential.username = username
+    }
+  },
   methods: {
     authorize(){
       this.loading = true
       ApiService.login(this.credential).then(res=>{
-        console.log("emitir evento: success")
         LoginService.login( res.data )
-
         this.$emit("success")
       }).catch(e=>{
         console.log("erro", e)

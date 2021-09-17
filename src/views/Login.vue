@@ -5,7 +5,7 @@
         <v-card class="elevation-1 pa-3">
           <v-card-text>
             <div class="layout column align-center mb-5">
-              <h3>Verificador de fim do mundo!</h3>
+              <h3 @click="toLogin('oi')" >Verificador de fim do mundo!</h3>
             </div>
             <v-tabs v-model="tab">
               <v-tab>Login</v-tab>
@@ -13,10 +13,10 @@
             </v-tabs>
             <v-tabs-items v-model="tab">
               <v-tab-item key="0">
-                <login-form @success="redirect"></login-form>
+                <login-form :username="username" @success="redirect"></login-form>
               </v-tab-item>
               <v-tabs-item v-if="tab==1" key="1">
-                <register-form @success="redirect"></register-form>
+                <register-form @success="toLogin"></register-form>
               </v-tabs-item>
             </v-tabs-items>
           </v-card-text>
@@ -36,12 +36,18 @@ export default {
   name: "Login",
   components: {LoginForm, RegisterForm},
   data : ()=>({
-    tab : 0
+    tab : 0,
+    username : null
   }),
   methods:{
     redirect(){
       console.log("recebeu o evento")
       this.$router.push("/dashboard")
+    },
+    toLogin(username){
+      console.log('Registered', username)
+      this.tab=0
+      this.username = username
     }
   }
 }

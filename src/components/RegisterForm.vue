@@ -57,8 +57,7 @@ export default {
       this.loading = true
       ApiService.register(this.credential).then(()=>{
         console.log("emitir evento: success")
-        alert('Cadastro realizado!')
-        this.$emit("success")
+        this.$emit("success", this.credential.username )
       }).catch(e=>{
         console.log("erro", e)
         this.$emit("error")
